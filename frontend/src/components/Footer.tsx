@@ -17,9 +17,11 @@ export default function Footer() {
         >
           <p className="font-medium text-slate-900 dark:text-white text-lg tracking-tight">EduServe.</p>
           <p className="text-xs tracking-wide uppercase opacity-70">The Unofficial Standard.</p>
-          <p className="mt-4 text-xs opacity-50">
-            © {new Date().getFullYear()} All rights reserved.
-          </p>
+          <div className="mt-4 flex items-center gap-3 text-xs opacity-50">
+            <span>© {new Date().getFullYear()} All rights reserved.</span>
+            <span>•</span>
+            <a href="#legal" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Use & Privacy Policy</a>
+          </div>
         </motion.div>
 
         <motion.div 
