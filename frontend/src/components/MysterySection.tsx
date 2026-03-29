@@ -57,7 +57,7 @@ export default function MysterySection() {
           viewport={{ once: true, amount: 0.7 }}
           className="relative mt-8"
         >
-          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-blue-950 via-slate-800 to-blue-900 dark:from-white dark:via-gray-200 dark:to-gray-500 drop-shadow-sm select-none py-2">
+          <h2 className="text-[11vw] sm:text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-blue-950 via-slate-800 to-blue-900 dark:from-white dark:via-gray-200 dark:to-gray-500 drop-shadow-sm select-none py-2">
             Manasalaaiyoo.
           </h2>
           <motion.div 
