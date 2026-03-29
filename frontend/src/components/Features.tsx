@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { FileText, Bot, CreditCard, BellRing } from 'lucide-react';
+import React from 'react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { FileText, CreditCard, BellRing, Smartphone } from 'lucide-react';
 
 const features = [
   {
@@ -9,9 +9,9 @@ const features = [
     icon: <FileText className="text-blue-600 dark:text-neon-blue w-8 h-8" />
   },
   {
-    title: 'AI Assistant',
-    description: 'Ask anything about your campus, timetable, or syllabus and get precise answers powered by EduServe AI.',
-    icon: <Bot className="text-blue-600 dark:text-neon-emerald w-8 h-8" />
+    title: 'All-in-One App',
+    description: 'Everything you need from results, notices, to payments compiled in a single lightweight mobile flow.',
+    icon: <Smartphone className="text-blue-600 dark:text-neon-emerald w-8 h-8" />
   },
   {
     title: 'Fee Payments',
@@ -45,19 +45,8 @@ const cardVariants = {
 };
 
 function FeatureCard({ feature }: { feature: typeof features[0] }) {
-  const ref = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
-  // 3D tilt values
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const xSpring = useSpring(x, { stiffness: 400, damping: 40 });
-  const ySpring = useSpring(y, { stiffness: 400, damping: 40 });
-
-  const rotateX = useTransform(ySpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(xSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -66,35 +55,18 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
 
-    // 3d tilt
-    const width = rect.width;
-    const height = rect.height;
-    const mouseXPos = e.clientX - rect.left;
-    const mouseYPos = e.clientY - rect.top;
-
-    const xPct = mouseXPos / width - 0.5;
-    const yPct = mouseYPos / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
   }
 
   function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
+    mouseX.set(0);
+    mouseY.set(0);
   }
 
   return (
     <motion.div
-      ref={ref}
       variants={cardVariants}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
       className="relative group glassmorphism p-8 rounded-3xl transition-colors duration-500 hover:bg-black/5 dark:hover:bg-white/5 cursor-default overflow-visible z-10"
     >
       <motion.div
@@ -109,7 +81,7 @@ function FeatureCard({ feature }: { feature: typeof features[0] }) {
           `,
         }}
       />
-      <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }} className="relative z-20">
+      <div className="relative z-20">
         <div className="bg-black/5 dark:bg-white/5 rounded-2xl w-16 h-16 flex items-center justify-center mb-6 shadow-inner border border-black/5 dark:border-white/5 group-hover:border-neon-blue/40 group-hover:shadow-[0_0_20px_rgba(79,139,255,0.2)] transition-all">
           {feature.icon}
         </div>
@@ -144,7 +116,6 @@ export default function Features() {
 
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative"
-          style={{ perspective: 1500 }}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
